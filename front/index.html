@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Imagens Similares - Farol Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <!-- Container central -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-2xl w-full space-y-6">
+        
+        <!-- Título -->
+        <h1 class="text-2xl font-bold text-center text-black-600">Busca de Imagens Similares - Farol Digital</h1>
+
+        <!-- Formulário de upload -->
+        <form id="uploadForm" enctype="multipart/form-data" class="space-y-4">
+            
+            <div>
+                <label class="block font-medium mb-1">Selecione uma imagem:</label>
+                <input 
+                    type="file" 
+                    id="query_img" 
+                    name="file" 
+                    accept="image/*,.jfif,.jpeg,.jpg,.png,.webp" 
+                    required 
+                    onchange="previewImage(event)"
+                    class="block w-full text-sm text-gray-500
+                           file:mr-4 file:py-2 file:px-4
+                           file:rounded-full file:border-0
+                           file:text-sm file:font-semibold
+                           file:bg-blue-100 file:text-blue-700
+                           hover:file:bg-blue-200
+                    "
+                >
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="topk" class="block font-medium mb-1">Selecione um K:</label>
+                    <input 
+                        type="number" 
+                        id="topk" 
+                        name="topk" 
+                        min="1" 
+                        max="1000" 
+                        value="10"
+                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                </div>
+                <div>
+                    <label for="Threshold" class="block font-medium mb-1">Threshold:</label>
+                    <input 
+                        type="number" 
+                        id="Threshold" 
+                        name="Threshold" 
+                        step="0.01" 
+                        min="0.01" 
+                        max="1.0" 
+                        value="0.90"
+                        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                </div>
+            </div>
+
+            <div class="flex gap-4">
+                <button 
+                    type="submit" 
+                    id="search_button"
+                    class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                    Buscar
+                </button>
+                <button 
+                    type="button" 
+                    id="delete_button"
+                    class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                    Deletar
+                </button>
+            </div>
+        </form>
+
+        <!-- Preview da imagem -->
+        <div class="text-center">
+            <h3 class="font-semibold mb-2">Imagem de consulta:</h3>
+            <img id="Imagem_query" class="mx-auto max-w-xs rounded-lg shadow-md hidden">
+        </div>
+
+        <!-- Resultados -->
+        <div>
+            <h2 class="text-lg font-bold mb-4 text-center">Imagens Mais Similares</h2>
+            <div id="results" class="flex flex-wrap justify-center gap-4"></div>
+        </div>
+
+    </div>
+
+    <script src="scripts.js" defer></script>
+</body>
+</html>
