@@ -2,8 +2,8 @@
 
 Aplicação FastAPI para detecção e remoção de imagens duplicadas de maneira semi-automática com suporte a CLIP embeddings, redução de dimensionalidade e indexação vetorial.
 
-![Alt text](image-1.png)
-![Alt text](image.png)
+![Alt text](screenshots/image.png)
+![Alt text](screenshots/image-1.png)
 
 ## Funcionalidades
 
