@@ -1,5 +1,5 @@
-__pycache__
-docker
+**__pycache__
 image_sim_farol
 mnt
-routes/__pycache__
+*.joblib
+docker

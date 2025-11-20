@@ -4,8 +4,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("uploadForm");
     const resultsDiv = document.getElementById("results");
     const deleteBtn = document.getElementById("delete_button");
+    const n_images = document.getElementById("n_imagens");
 
-    // preview image
+    // Atualiza número de imagens no Banco (Milvus)
+    async function updateImageCount() {
+        try {
+            const res = await fetch("/count_images");
+            const data = await res.json();
+
+            if (data.count !== undefined) {
+                n_images.textContent = `${data.count} Imagens Presentes no Banco de Dados`;
+            } else {
+                n_images.textContent = "Erro ao carregar total de imagens";
+            }
+        } catch (err) {
+            console.error("Erro ao buscar número de imagens:", err);
+            n_images.textContent = "Erro ao comunicar com servidor";
+        }
+    }
+
+    // Atualiza no carregamento da página
+    updateImageCount();
+
     function previewImage(event) {
         img_query.src = URL.createObjectURL(event.target.files[0]);
         img_query.style.display = "block";
@@ -13,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     query.addEventListener("change", previewImage);
 
-    // form submit: search images
+    // form submit: pesquisar imagens
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         resultsDiv.innerHTML = "<p>Buscando imagens similares...</p>";
@@ -89,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await res.json();
 
             if (data.status === "success") {
-                let deletedFiles = data.deleted_paths;
+                let deletedFiles = data.deleted;
                 
                 if (deletedFiles.length > 0) {
                     deletedFiles.forEach(path => {

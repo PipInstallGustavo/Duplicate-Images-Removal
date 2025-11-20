@@ -14,6 +14,9 @@
         <!-- Título -->
         <h1 class="text-2xl font-bold text-center text-black-600">Busca de Imagens Similares - Farol Digital</h1>
 
+        <!-- Número de Imagens no BD -->
+        <p class="text-center text-black-600" id="n_imagens"></p>
+        
         <!-- Formulário de upload -->
         <form id="uploadForm" enctype="multipart/form-data" class="space-y-4">
             
@@ -25,7 +28,6 @@
                     name="file" 
                     accept="image/*,.jfif,.jpeg,.jpg,.png,.webp" 
                     required 
-                    onchange="previewImage(event)"
                     class="block w-full text-sm text-gray-500
                            file:mr-4 file:py-2 file:px-4
                            file:rounded-full file:border-0
